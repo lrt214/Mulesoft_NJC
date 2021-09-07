@@ -8,4 +8,4 @@
 <br>stored data using  into  table using  Insert.java file </br>
  <h5>SnapShot of query Select * from movie;</h5>
  
- <img src="" alt="Italian Trulli">
+ <img src="https://github.com/lrt214/Mulesoft_NJC/blob/main/Select__from_movies.PNG" alt="output">
