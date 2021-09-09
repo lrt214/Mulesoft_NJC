@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class Insert {  
    
     private Connection connect() {  
-        // SQLite connection string  
+      
         String url = "jdbc:sqlite:C://sqlite/Fav_movie.db";  
         Connection conn = null;  
         try {  
@@ -40,7 +40,7 @@ public class Insert {
    
         Insert app = new Insert();  
         // insert three new rows  
-        app.insert(" Men in Black   " , " Will Smith","Vincent D’Onofrio","Barry Sonnenfeld",1997); 
+        app.insert(" Men in Black   " , " Will Smith","Vincent Dâ€™Onofrio","Barry Sonnenfeld",1997); 
         app.insert(" The Shawshank Redemption " , " Tim Robbins","Renee Blaine ","Frank Darabont",1994); 
         app.insert("The Godfather" , "Marlon Brando","Diane Keaton","Francis Ford Coppola",1972); 
         app.insert("The Godfather 2" , "Al Pacino","Diane Keaton","Francis Ford Coppola",1974); 
