@@ -1,51 +1,32 @@
 
-import java.sql.Connection;  
-import java.sql.DriverManager;  
-import java.sql.PreparedStatement;  
-import java.sql.SQLException;  
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class Insert {
+   static final String DB_URL = "jdbc:sqlite:C://sqlite/Fav_movie.db";
    
-public class Insert {  
-   
-    private Connection connect() {  
-      
-        String url = "jdbc:sqlite:C://sqlite/Fav_movie.db";  
-        Connection conn = null;  
-        try {  
-            conn = DriverManager.getConnection(url);  
-        } catch (SQLException e) {  
-            System.out.println(e.getMessage());  
-        }  
-        return conn;  
-    }  
-   
-  
-    public void insert(String name, String string, String string2, String string3, int year) {  
-        String sql = "INSERT INTO  Movie(Name , Actor , Actress, Director,  YearOfRelease) VALUES(?,?,?,?,?)";  
-   
-        try{  
-            Connection conn = this.connect();  
-            PreparedStatement pstmt = conn.prepareStatement(sql);  
-            pstmt.setString(1, name); 
-            pstmt.setString(2, string); 
-            pstmt.setString(3, string2); 
-            pstmt.setString(4, string3); 
-            pstmt.setDouble(5, year);  
-            pstmt.executeUpdate();  
-        } catch (SQLException e) {  
-            System.out.println(e.getMessage());  
-        }  
-    }  
-   
-    public static void main(String[] args) {  
-   
-        Insert app = new Insert();  
-        // insert three new rows  
-        app.insert(" Men in Black   " , " Will Smith","Vincent D’Onofrio","Barry Sonnenfeld",1997); 
-        app.insert(" The Shawshank Redemption " , " Tim Robbins","Renee Blaine ","Frank Darabont",1994); 
-        app.insert("The Godfather" , "Marlon Brando","Diane Keaton","Francis Ford Coppola",1972); 
-        app.insert("The Godfather 2" , "Al Pacino","Diane Keaton","Francis Ford Coppola",1974); 
-        
-          
-    }  
-   
-}  
+
+   public static void main(String[] args) {
+      // Open a connection
+      try(Connection conn = DriverManager.getConnection(DB_URL);
+         Statement stmt = conn.createStatement();
+      ) {		      
+         // Execute a query
+         System.out.println("Inserting records into the table...");          
+         String sql = "INSERT INTO Movie VALUES ('Men in Black' , 'Will Smith','Vincent D’Onofrio','Barry Sonnenfeld', 1997)";
+         stmt.executeUpdate(sql);
+         String sql1 = "INSERT INTO Movie VALUES ('The Shawshank Redemption' , 'Tim Robbins','Renee Blaine','Frank Darabont', 1994)";
+         stmt.executeUpdate(sql1);
+         String sql2 = "INSERT INTO Movie VALUES (\"The Godfather\" , \"Marlon Brando\",\"Diane Keaton\",\"Francis Ford Coppola\",1972)";
+         stmt.executeUpdate(sql2);
+         String sql3 = "INSERT INTO Movie VALUES (\"The Godfather 2\" , \"Al Pacino\",\"Diane Keaton\",\"Francis Ford Coppola\",1974)";
+         stmt.executeUpdate(sql3);
+         
+         System.out.println("Inserted records into the table...");   	  
+      } catch (SQLException e) {
+         e.printStackTrace();
+      } 
+   }
+}
